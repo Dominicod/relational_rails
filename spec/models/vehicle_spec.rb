@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Vehicles, type: :model do
+RSpec.describe Vehicle, type: :model do
   describe 'instance methods' do
     # let(:) { i = '' }
     describe '#index' do
