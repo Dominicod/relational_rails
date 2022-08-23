@@ -3,7 +3,7 @@ class DealershipsController < ApplicationController
   end
 
   def index
-    @dealerships = Dealership.all
+    @dealerships = Dealership.all.order(:created_at)
   end
 
   def show

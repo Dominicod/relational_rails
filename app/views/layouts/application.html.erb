@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>RelationalRails</title>
     <%= csrf_meta_tags %>
@@ -10,6 +10,8 @@
   </head>
 
   <body>
+    <%= link_to "Vehicles", '/vehicles' %>
+    <%= link_to "Dealerships", '/dealerships' %>
     <%= yield %>
   </body>
 </html>

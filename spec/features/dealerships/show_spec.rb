@@ -24,7 +24,7 @@ RSpec.describe Dealership, type: :feature do
 
       expect(page).to have_link('', href: '/dealerships')
       expect(page).to have_link('', href: '/vehicles')
-      expect(page).to have_link('', href: "/dealerships/#{@dealer_2.id}/vehicles")
+      expect(page).to have_link('', href: "/dealerships/#{@dealer_1.id}/vehicles")
     end
 
     it "When I visit '/dealerships/:id', the page only has information on the given id" do
@@ -37,7 +37,7 @@ RSpec.describe Dealership, type: :feature do
     it "As a visitor, when I visit a dealership's show page, I see the vehicles count." do
       visit "/dealerships/#{@dealer_2.id}"
 
-      expect(page).to have_content("This dealership has #{@dealer_1.vehicles.count} vehicles")
+      expect(page).to have_content("Current vehicle count: #{@dealer_2.vehicles.count}")
     end
   end
 end

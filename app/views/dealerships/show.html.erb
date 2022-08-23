@@ -3,4 +3,6 @@
   <p>Dealership lot size: <%= @dealership.vehicle_lot_size %></p>
   <p>Service center: <%= @dealership.service_center %></p>
   <p>Car-wash center: <%= @dealership.car_wash %></p>
+  <p>Current vehicle count: <%= @dealership.vehicles.count %></p>
+  <%= link_to "View dealership vehicles","/dealerships/#{@dealership.id}/vehicles" %>
 </div>

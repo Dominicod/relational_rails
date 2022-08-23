@@ -2,4 +2,5 @@
 
 <% @dealerships.each do |dealer| %>
   <p>Dealership name: <%= link_to dealer.name, "/dealerships/#{dealer.id}"%></p>
+  <p>Created: <%= dealer.created_at %></p>
 <% end %>
