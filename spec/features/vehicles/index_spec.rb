@@ -21,13 +21,16 @@ RSpec.describe Vehicle, type: :feature do
 
       vehicles.each do |vehicle|
         within "#vehicle-#{vehicle.id}" do
-          expect(page).to have_content(vehicle.name)
-          expect(page).to have_content(vehicle.cylinder_count)
-          expect(page).to have_content(vehicle.luxury_model)
-          expect(page).to have_content(vehicle.horsepower)
-          expect(page).to have_content(vehicle.torque)
+          expect(page).to have_content("Vehicle name: #{vehicle.name}")
+          expect(page).to have_content("Vehicle cylinder count: #{vehicle.cylinder_count}")
+          expect(page).to have_content("This vehicle has the luxury model: #{vehicle.luxury_model}")
+          expect(page).to have_content("Vehicle horsepower: #{vehicle.horsepower}")
+          expect(page).to have_content("Vehicle torque: #{vehicle.torque}")
         end
       end
+
+      expect(page).to have_link('', href: '/dealerships')
+      expect(page).to have_link('', href: '/vehicles')
     end
   end
 end
