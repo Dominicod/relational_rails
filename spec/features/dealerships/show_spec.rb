@@ -8,7 +8,7 @@ RSpec.describe Dealership, type: :feature do
   end
 
   describe '#show' do
-    xit "When I visit '/dealerships/:id', I see the dealerships with that id including the dealership's attributes" do
+    it "When I visit '/dealerships/:id', I see the dealerships with that id including the dealership's attributes" do
       visit "/dealerships/#{@dealer_1.id}"
 
       expect(page).to have_content(@dealer_1.name)
@@ -17,7 +17,7 @@ RSpec.describe Dealership, type: :feature do
       expect(page).to have_content(@dealer_1.car_wash)
     end
 
-    xit "When I visit '/dealerships/:id', the page only has information on the given id" do
+    it "When I visit '/dealerships/:id', the page only has information on the given id" do
       visit "/dealerships/#{@dealer_1.id}"
 
       expect(page).to_not have_content(@dealer_2.name)

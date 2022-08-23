@@ -13,8 +13,8 @@ RSpec.describe Dealership, type: :feature do
     @vehicle_5 = @dealer_3.vehicles.create!(name: "GTR", cylinder_count: 6, luxury_model: true, horsepower: 600, torque: 481)
   end
 
-  describe '#dealership_vehicles_index' do
-    xit "When I visit '/dealerships/:dealership_id/vehicles', I see each Vehicle that is associated with that Dealership with each Vehicle's attributes" do
+  describe '#dealership_vehicles' do
+    it "When I visit '/dealerships/:dealership_id/vehicles', I see each Vehicle that is associated with that Dealership with each Vehicle's attributes" do
       visit "/dealerships/#{@dealer_2.id}/vehicles"
 
       vehicles = [@vehicle_3, @vehicle_4]
@@ -30,7 +30,7 @@ RSpec.describe Dealership, type: :feature do
       end
     end
 
-    xit "When I visit '/dealerships/:dealership_id/vehicles', I do not see vehicles that the dealerships does not have on the lot" do
+    it "When I visit '/dealerships/:dealership_id/vehicles', I do not see vehicles that the dealerships does not have on the lot" do
       visit "/dealerships/#{@dealer_2.id}/vehicles"
 
       expect(page).to_not have_content(@vehicle_5.name)

@@ -14,7 +14,7 @@ RSpec.describe Vehicle, type: :feature do
   end
 
   describe '#show' do
-    xit "When I visit '/vehicles/:id', I see the vehicle with that id including the vehicle's attributes" do
+    it "When I visit '/vehicles/:id', I see the vehicle with that id including the vehicle's attributes" do
       visit "/vehicles/#{@vehicle_2.id}"
 
       expect(page).to have_content(@vehicle_2.name)
@@ -24,7 +24,7 @@ RSpec.describe Vehicle, type: :feature do
       expect(page).to have_content(@vehicle_2.torque)
     end
 
-    xit "When I visit '/vehicles/:id', I don't see vehicles not associated to the id I requested" do
+    it "When I visit '/vehicles/:id', I don't see vehicles not associated to the id I requested" do
       visit "/vehicles/#{@vehicle_2.id}"
 
       expect(page).to_not have_content(@vehicle_3.name)

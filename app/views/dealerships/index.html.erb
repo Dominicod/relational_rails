@@ -1,0 +1,5 @@
+<h1>All Dealerships</h1>
+
+<% @dealerships.each do |dealer| %>
+  <%= link_to dealer.name, "/dealerships/#{dealer.id}"%>
+<% end %>

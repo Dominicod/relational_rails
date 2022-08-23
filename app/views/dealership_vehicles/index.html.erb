@@ -1,0 +1,11 @@
+<h1>All vehicles list</h1>
+
+<% @dealership.vehicles.each do |vehicle| %>
+  <ul id="vehicle-<%= vehicle.id %>">
+    <li><%= vehicle.name %></li>
+    <li><%= vehicle.cylinder_count %></li>
+    <li><%= vehicle.luxury_model %></li>
+    <li><%= vehicle.horsepower %></li>
+    <li><%= vehicle.torque %></li>
+  </ul>
+<% end %>
