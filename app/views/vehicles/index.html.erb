@@ -1,0 +1,11 @@
+<h1>All Vehicles</h1>
+
+<% @vehicles.each do |vehicle| %>
+  <ul id="vehicle-<%= vehicle.id %>">
+    <li><%= link_to vehicle.name, "/vehicles/#{vehicle.id}"%></li>
+    <li><%= vehicle.cylinder_count %></li>
+    <li><%= vehicle.luxury_model %></li>
+    <li><%= vehicle.horsepower %></li>
+    <li><%= vehicle.torque %></li>
+  </ul>
+<% end %>
