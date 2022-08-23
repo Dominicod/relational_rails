@@ -42,7 +42,7 @@ RSpec.describe Dealership, type: :model do
       end
     end
 
-    describe '#parent_children_index' do
+    describe '#dealership_vehicles_index' do
       xit "When I visit '/dealerships/:dealership_id/vehicles', I see each Vehicle that is associated with that Dealership with each Vehicle's attributes" do
         visit "/dealerships/#{@dealer_2.id}/vehicles"
 
