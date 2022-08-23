@@ -17,19 +17,22 @@ RSpec.describe Vehicle, type: :feature do
     it "When I visit '/vehicles/:id', I see the vehicle with that id including the vehicle's attributes" do
       visit "/vehicles/#{@vehicle_2.id}"
 
-      expect(page).to have_content(@vehicle_2.name)
-      expect(page).to have_content(@vehicle_2.cylinder_count)
-      expect(page).to have_content(@vehicle_2.luxury_model)
-      expect(page).to have_content(@vehicle_2.horsepower)
-      expect(page).to have_content(@vehicle_2.torque)
+      expect(page).to have_content("Vehicle name: #{@vehicle_2.name}")
+      expect(page).to have_content("Vehicle cylinder count: #{@vehicle_2.cylinder_count}")
+      expect(page).to have_content("This vehicle has the luxury model: #{@vehicle_2.luxury_model}")
+      expect(page).to have_content("Vehicle horsepower: #{@vehicle_2.horsepower}")
+      expect(page).to have_content("Vehicle torque: #{@vehicle_2.torque}")
+
+      expect(page).to have_link('', href: '/dealerships')
+      expect(page).to have_link('', href: '/vehicles')
     end
 
     it "When I visit '/vehicles/:id', I don't see vehicles not associated to the id I requested" do
       visit "/vehicles/#{@vehicle_2.id}"
 
-      expect(page).to_not have_content(@vehicle_3.name)
-      expect(page).to_not have_content(@vehicle_1.name)
-      expect(page).to_not have_content(@vehicle_4.name)
+      expect(page).to_not have_content("Vehicle name: #{@vehicle_3.name}")
+      expect(page).to_not have_content("Vehicle name: #{@vehicle_1.name}")
+      expect(page).to_not have_content("Vehicle name: #{@vehicle_4.name}")
     end
   end
 end

@@ -21,21 +21,24 @@ RSpec.describe Dealership, type: :feature do
 
       vehicles.each do |vehicle|
         within "#vehicle-#{vehicle.id}" do
-          expect(page).to have_content(vehicle.name)
-          expect(page).to have_content(vehicle.cylinder_count)
-          expect(page).to have_content(vehicle.luxury_model)
-          expect(page).to have_content(vehicle.horsepower)
-          expect(page).to have_content(vehicle.torque)
+          expect(page).to have_content("Vehicle name: #{vehicle.name}")
+          expect(page).to have_content("Vehicle cylinder count: #{vehicle.cylinder_count}")
+          expect(page).to have_content("This vehicle has the luxury model: #{vehicle.luxury_model}")
+          expect(page).to have_content("Vehicle horsepower: #{vehicle.horsepower}")
+          expect(page).to have_content("Vehicle torque: #{vehicle.torque}")
         end
       end
+
+      expect(page).to have_link('', href: '/dealerships')
+      expect(page).to have_link('', href: '/vehicles')
     end
 
     it "When I visit '/dealerships/:dealership_id/vehicles', I do not see vehicles that the dealerships does not have on the lot" do
       visit "/dealerships/#{@dealer_2.id}/vehicles"
 
-      expect(page).to_not have_content(@vehicle_5.name)
-      expect(page).to_not have_content(@vehicle_1.name)
-      expect(page).to_not have_content(@vehicle_2.name)
+      expect(page).to_not have_content("Vehicle name: #{@vehicle_5.name}")
+      expect(page).to_not have_content("Vehicle name: #{@vehicle_1.name}")
+      expect(page).to_not have_content("Vehicle name: #{@vehicle_2.name}")
     end
   end
 end

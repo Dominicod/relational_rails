@@ -11,9 +11,14 @@ RSpec.describe Dealership, type: :feature do
     it "When I visit '/dealerships', I see the name of each dealerships record in the system" do
       visit "/dealerships"
 
-      expect(page).to have_content(@dealer_1.name)
-      expect(page).to have_content(@dealer_2.name)
-      expect(page).to have_content(@dealer_3.name)
+      expect(page).to have_content("Dealership name: #{@dealer_1.name}")
+      expect(page).to have_content("Dealership name: #{@dealer_2.name}")
+      expect(page).to have_content("Dealership name: #{@dealer_3.name}")
+
+      expect(page).to have_link('', href: '/dealerships')
+      expect(page).to have_link('', href: '/vehicles')
     end
+
+    it "As a visitor, when I visit '/dealerships', the records are ordered by recently created"
   end
 end
