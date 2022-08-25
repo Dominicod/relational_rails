@@ -32,20 +32,20 @@ RSpec.describe Dealership, type: :feature do
       expect(page).to have_content(@dealer_2.created_at)
       expect(page).to have_content(@dealer_3.created_at)
     end
-  end
 
-  it 'New dealership link in index is present, takes user to "/parents/new" to where they can submit a form that updates the DB' do
-    visit "/dealerships"
+    it 'New dealership link in index is present, takes user to "/parents/new" to where they can submit a form that updates the DB' do
+      visit "/dealerships"
 
-    click_link "New Dealership"
+      click_link "New Dealership"
 
-    puts current_url
+      puts current_url
 
-    expect(page.has_field?).to eq true
+      expect(page.has_field?).to eq true
 
-    fill_in "", with: ""
-    click "Create Dealership"
+      fill_in "", with: ""
+      click "Create Dealership"
 
-    # Dealership.last.id
+      # Dealership.last.id
+    end
   end
 end
