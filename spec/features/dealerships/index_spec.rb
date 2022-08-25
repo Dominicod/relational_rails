@@ -22,12 +22,12 @@ RSpec.describe Dealership, type: :feature do
     it "As a visitor, when I visit '/dealerships', the records are ordered by recently created" do
       visit "/dealerships"
 
-      this = find("#id_#{@dealer_1.id}")
-      that = find("#id_#{@dealer_2.id}")
-      also_this = find("#id_#{@dealer_3.id}")
+      dealer_toyota = find("#id_#{@dealer_1.id}")
+      dealer_ford = find("#id_#{@dealer_2.id}")
+      dealer_nissan = find("#id_#{@dealer_3.id}")
 
-      expect(this).to appear_before(that)
-      expect(that).to appear_before(also_this)
+      expect(dealer_toyota).to appear_before(dealer_ford)
+      expect(dealer_ford).to appear_before(dealer_nissan)
       expect(page).to have_content(@dealer_1.created_at)
       expect(page).to have_content(@dealer_2.created_at)
       expect(page).to have_content(@dealer_3.created_at)

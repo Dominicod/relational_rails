@@ -5,4 +5,5 @@ class Vehicle < ApplicationRecord
   validates_presence_of :torque
   validates_presence_of :horsepower
   validates_presence_of :dealership_id
+  validates_presence_of :dealership_id
 end
