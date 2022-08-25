@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 2022_08_22_221923) do
   end
 
   create_table "vehicles", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "name"
     t.integer "cylinder_count"
     t.boolean "luxury_model"
