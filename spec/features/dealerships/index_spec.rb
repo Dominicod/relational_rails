@@ -58,5 +58,18 @@ RSpec.describe "Dealership index_page", type: :feature do
         expect(page).to have_content(Dealership.last.created_at)
       end
     end
+
+    it 'I can click a update parent button from the parent index page' do
+      dealerships = [@dealer_1, @dealer_2, @dealer_3]
+      dealerships.each do |dealer|
+        visit "/dealerships"
+        within "#id_#{dealer.id}" do
+          expect(page.has_link?).to eq true
+          click_link "Update Dealership"
+
+          expect(current_url).to eq("http://www.example.com/dealerships/#{dealer.id}/edit")
+        end
+      end
+    end
   end
 end
