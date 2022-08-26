@@ -4,5 +4,6 @@
   <p>Service center: <%= @dealership.service_center %></p>
   <p>Car-wash center: <%= @dealership.car_wash %></p>
   <p>Current vehicle count: <%= @dealership.vehicles_count %></p>
+  <%= link_to "Update Dealership","/dealerships/#{@dealership.id}/edit" %>
   <%= link_to "View dealership vehicles","/dealerships/#{@dealership.id}/vehicles" %>
 </div>

@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   post '/dealerships', to: 'dealerships#create'
   get '/dealerships/new', to: 'dealerships#new'
   get '/dealerships/:id', to: 'dealerships#show'
+  get '/dealerships/:id/edit', to: 'dealerships#edit'
+  patch '/dealerships/:id', to: 'dealerships#update'
   get '/dealerships/:id/vehicles', to: 'dealership_vehicles#index'
 
   get '/vehicles', to: 'vehicles#index'
