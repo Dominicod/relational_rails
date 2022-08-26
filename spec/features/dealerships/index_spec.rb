@@ -59,7 +59,7 @@ RSpec.describe "Dealership index_page", type: :feature do
       end
     end
 
-    it 'I can click a update parent button from the parent index page' do
+    it 'I can click a update dealership button from the dealership index page' do
       dealerships = [@dealer_1, @dealer_2, @dealer_3]
       dealerships.each do |dealer|
         visit "/dealerships"

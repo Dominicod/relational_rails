@@ -52,4 +52,18 @@ RSpec.describe "Vehicles index_page", type: :feature do
       expect(page).to_not have_content("Vehicle name: #{@vehicle_5.name}")
     end
   end
+
+  it 'I can click a update vehicle button from the vehicle index page' do
+    vehicles = [@vehicle_1, @vehicle_2, @vehicle_3, @vehicle_4, @vehicle_5]
+
+    vehicles.each do |vehicle|
+      visit "/vehicles"
+      within "#id_#{vehicle.id}" do
+        expect(page.has_link?).to eq true
+        click_link "Update Vehicle"
+
+        expect(current_url).to eq("http://www.example.com/vehicles/#{vehicle.id}/edit")
+      end
+    end
+  end
 end
