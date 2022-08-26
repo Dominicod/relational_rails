@@ -34,7 +34,7 @@ RSpec.describe "Dealership_vehicles_index_page", type: :feature do
     end
 
     it "When I visit '/dealerships/:dealership_id/vehicles', I do not see vehicles that the dealerships does not have on the lot" do
-      visit "/dealerships/#{@dealer_2.id}/vehicles"
+      visit "/dealerships/#{@dealer_2.id}/vehicles/"
 
       expect(page).to_not have_content("Vehicle name: #{@vehicle_5.name}")
       expect(page).to_not have_content("Vehicle name: #{@vehicle_1.name}")
@@ -46,10 +46,6 @@ RSpec.describe "Dealership_vehicles_index_page", type: :feature do
       vehicle_name = "Explorer"
 
       click_link "Create Vehicle"
-
-# Then a `POST` request is sent to '/parents/:parent_id/child_table_name',
-# a new child object/row is created for that parent,
-# and I am redirected to the Parent Childs Index page where I can see the new child listed
 
       expect(current_url).to eq("http://www.example.com/dealerships/#{@dealer_2.id}/vehicles/new")
 

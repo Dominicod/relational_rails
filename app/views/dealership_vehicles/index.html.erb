@@ -1,4 +1,5 @@
 <h1>All vehicles list</h1>
+<%= link_to "Create Vehicle", "/dealerships/#{@dealership.id}/vehicles/new" %>
 
 <% @dealership.vehicles.each do |vehicle| %>
   <div id="vehicle-<%= vehicle.id %>">
