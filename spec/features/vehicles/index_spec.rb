@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Vehicle, type: :feature do
+RSpec.describe "Vehicles index_page", type: :feature do
   before(:each) do
     @dealer_1 = Dealership.create!(name: "Toyota", vehicle_lot_size: 10, service_center: true, car_wash: false)
     @dealer_2 = Dealership.create!(name: "Ford", vehicle_lot_size: 12, service_center: true, car_wash: true)
