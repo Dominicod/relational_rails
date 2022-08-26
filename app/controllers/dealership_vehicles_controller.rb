@@ -4,7 +4,8 @@ class DealershipVehiclesController < ApplicationController
   end
 
   def index
-    @dealership = Dealership.find(params[:id])
+    dealer = Dealership.find(params[:id])
+    params[:alphabetical] == "alphabetical" ? @vehicles = dealer.vehicles.order(:name) : @vehicles = dealer.vehicles
   end
 
   def create

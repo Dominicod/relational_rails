@@ -41,7 +41,7 @@ RSpec.describe "Dealership_vehicles_index_page", type: :feature do
       expect(page).to_not have_content("Vehicle name: #{@vehicle_2.name}")
     end
 
-    it "When I visit '/vehicles', I see a link to add a new adoptable Vehicle for that parent 'Create Vehicle' which allows me to make a new vehicle" do
+    it "When I visit '/dealerships/:dealership_id/vehicles', I see a link to add a new adoptable Vehicle for that parent 'Create Vehicle' which allows me to make a new vehicle" do
       visit "/dealerships/#{@dealer_2.id}/vehicles"
       vehicle_name = "Explorer"
       vehicle_cylinders = 6
@@ -71,6 +71,19 @@ RSpec.describe "Dealership_vehicles_index_page", type: :feature do
         expect(page).to have_content("Vehicle horsepower: #{vehicle_hp}")
         expect(page).to have_content("Vehicle torque: #{vehicle_tq}")
       end
+    end
+
+    it "When I visit '/dealerships/:dealership_id/vehicles', I see the vehicles in alphabetical order by name" do
+      visit "/dealerships/#{@dealer_1.id}/vehicles"
+
+      click_link "Sort alphabetically by Name"
+
+      vehicle_supra = find("#id_#{@vehicle_1.id}")
+      vehicle_rav_4 = find("#id_#{@vehicle_2.id}")
+
+      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealer_1.id}/true/vehicles/")
+
+      expect(vehicle_rav_4).to appear_before(vehicle_supra)
     end
   end
 end

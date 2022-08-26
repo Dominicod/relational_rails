@@ -1,7 +1,7 @@
 <h1>All vehicles list</h1>
-<%= link_to "Create Vehicle", "/dealerships/#{@dealership.id}/vehicles/new" %>
+<%= link_to "Create Vehicle", "/dealerships/#{@vehicles.first.dealership_id}/vehicles/new" %>
 
-<% @dealership.vehicles.each do |vehicle| %>
+<% @vehicles.each do |vehicle| %>
   <div id="id_<%= vehicle.id %>">
     <p>Vehicle name: <%= vehicle.name %></p>
     <p>Vehicle cylinder count: <%= vehicle.cylinder_count %></p>
@@ -10,3 +10,4 @@
     <p>Vehicle torque: <%= vehicle.torque %></p>
   </div>
 <% end %>
+<%= link_to "Sort alphabetically by Name", "/dealerships/#{@vehicles.first.dealership_id}/alphabetical/vehicles/" %>
