@@ -40,5 +40,32 @@ RSpec.describe "Dealership_vehicles_index_page", type: :feature do
       expect(page).to_not have_content("Vehicle name: #{@vehicle_1.name}")
       expect(page).to_not have_content("Vehicle name: #{@vehicle_2.name}")
     end
+
+    it "When I visit '/vehicles', I see a link to add a new adoptable Vehicle for that parent 'Create Vehicle' which allows me to make a new vehicle" do
+      visit "/dealerships/#{@dealer_2.id}/vehicles"
+      vehicle_name = "Explorer"
+
+      click_link "Create Vehicle"
+
+# Then a `POST` request is sent to '/parents/:parent_id/child_table_name',
+# a new child object/row is created for that parent,
+# and I am redirected to the Parent Childs Index page where I can see the new child listed
+
+      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealer_2.id}/vehicles/new")
+
+      expect(page.has_field?).to eq true
+
+      fill_in "vehicle[name]", with: vehicle_name
+      fill_in "vehicle[cylinder_count]", with: 6
+      fill_in "vehicle[horsepower]", with: 400
+      fill_in "vehicle[torque]", with: 415
+      check "vehicle[luxury_model]"
+
+      click_on "Create Vehicle"
+
+      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealer_2.id}/vehicles")
+
+      expect(page).to have_content("#{Vehicle.last.name}")
+    end
   end
 end
