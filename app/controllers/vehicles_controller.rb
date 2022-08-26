@@ -3,7 +3,7 @@ class VehiclesController < ApplicationController
   end
 
   def index
-    @vehicles = Vehicle.all
+    @vehicles = Vehicle.all.where("luxury_model = true")
   end
 
   def show

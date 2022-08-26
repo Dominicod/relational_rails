@@ -10,7 +10,7 @@ RSpec.describe "Vehicles index_page", type: :feature do
     @vehicle_2 = @dealer_1.vehicles.create!(name: "Rav-4", cylinder_count: 4, luxury_model: true, horsepower: 203, torque: 142)
     @vehicle_3 = @dealer_2.vehicles.create!(name: "Mustang GT Fastback", cylinder_count: 8, luxury_model: true, horsepower: 450, torque: 410)
     @vehicle_4 = @dealer_2.vehicles.create!(name: "Ford GT", cylinder_count: 6, luxury_model: true, horsepower: 660, torque: 634)
-    @vehicle_5 = @dealer_3.vehicles.create!(name: "GTR", cylinder_count: 6, luxury_model: false, horsepower: 600, torque: 481)
+    @vehicle_5 = @dealer_3.vehicles.create!(name: "GTR", cylinder_count: 6, luxury_model: true, horsepower: 600, torque: 481)
   end
 
   describe '#index' do
@@ -34,6 +34,7 @@ RSpec.describe "Vehicles index_page", type: :feature do
     end
 
     it "When I visit '/vehicles' I only see true records" do
+      @vehicle_5.update(name: "GTR", cylinder_count: 6, luxury_model: false, horsepower: 600, torque: 481)
       visit "/vehicles"
 
       vehicles = [@vehicle_1, @vehicle_2, @vehicle_3, @vehicle_4]
