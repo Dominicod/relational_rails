@@ -1,0 +1,25 @@
+<h1>Update Vehicle</h1>
+
+<p>Update Vehicle</p>
+<form action="/vehicles/<%= @vehicle.id %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="PATCH" />
+  <p>Enter a update for the vehicle:</p>
+
+  <label for="name">Vehicle name:</label>
+  <input id="name" type='text' name='vehicle[name]' required/><br/>
+
+  <label for="cylinder_count">Vehicle cylinder count:</label>
+  <input id="cylinder_count" type='text' name='vehicle[cylinder_count]' required/><br/>
+
+  <label for="horsepower">Vehicle horsepower:</label>
+  <input id="horsepower" type='text' name='vehicle[horsepower]' required/><br/>
+
+  <label for="torque">Vehicle torque:</label>
+  <input id="torque" type='text' name='vehicle[torque]' required/><br/>
+
+  <label for="luxury_model">Luxury model:</label>
+  <input id="luxury_model" type='checkbox' name='vehicle[luxury_model]'/><br/>
+
+  <input type='submit' value="Update Vehicle"/>
+</form>

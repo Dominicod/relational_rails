@@ -34,5 +34,32 @@ RSpec.describe "Vehicle show_page", type: :feature do
       expect(page).to_not have_content("Vehicle name: #{@vehicle_1.name}")
       expect(page).to_not have_content("Vehicle name: #{@vehicle_4.name}")
     end
+
+    it "When I visit '/vehicles/:id' I see a link to update that vehicle which takes me to '/vehicles/:id/edit' so I can update the vehicle" do
+      visit "/vehicles/#{@vehicle_1.id}"
+      vehicle_name = "GR86"
+
+      click_link "Update Vehicle"
+
+      expect(current_url).to eq("http://www.example.com/vehicles/#{@vehicle_1.id}/edit")
+
+      expect(page.has_field?).to eq true
+
+      fill_in "vehicle[name]", with: vehicle_name
+      fill_in "vehicle[cylinder_count]", with: 4
+      fill_in "vehicle[horsepower]", with: 228
+      fill_in "vehicle[torque]", with: 200
+      check "vehicle[luxury_model]"
+
+      click_on "Update Vehicle"
+
+      expect(current_url).to eq("http://www.example.com/vehicles/#{@vehicle_1.id}")
+
+
+      expect(page).to have_content("#{vehicle_name}")
+      expect(page).to have_content(4)
+      expect(page).to have_content(228)
+      expect(page).to have_content(200)
+    end
   end
 end
