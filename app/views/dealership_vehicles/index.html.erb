@@ -2,7 +2,7 @@
 <%= link_to "Create Vehicle", "/dealerships/#{@dealership.id}/vehicles/new" %>
 
 <% @dealership.vehicles.each do |vehicle| %>
-  <div id="vehicle-<%= vehicle.id %>">
+  <div id="id_<%= vehicle.id %>">
     <p>Vehicle name: <%= vehicle.name %></p>
     <p>Vehicle cylinder count: <%= vehicle.cylinder_count %></p>
     <p>This vehicle has the luxury model: <%= vehicle.luxury_model %></p>

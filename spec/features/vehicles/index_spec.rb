@@ -20,7 +20,7 @@ RSpec.describe "Vehicles index_page", type: :feature do
       vehicles = [@vehicle_1, @vehicle_2, @vehicle_3, @vehicle_4, @vehicle_5]
 
       vehicles.each do |vehicle|
-        within "#vehicle-#{vehicle.id}" do
+        within "#id_#{vehicle.id}" do
           expect(page).to have_content("Vehicle name: #{vehicle.name}")
           expect(page).to have_content("Vehicle cylinder count: #{vehicle.cylinder_count}")
           expect(page).to have_content("This vehicle has the luxury model: #{vehicle.luxury_model}")

@@ -20,7 +20,7 @@ RSpec.describe "Dealership_vehicles_index_page", type: :feature do
       vehicles = [@vehicle_3, @vehicle_4]
 
       vehicles.each do |vehicle|
-        within "#vehicle-#{vehicle.id}" do
+        within "#id_#{vehicle.id}" do
           expect(page).to have_content("Vehicle name: #{vehicle.name}")
           expect(page).to have_content("Vehicle cylinder count: #{vehicle.cylinder_count}")
           expect(page).to have_content("This vehicle has the luxury model: #{vehicle.luxury_model}")
@@ -44,6 +44,9 @@ RSpec.describe "Dealership_vehicles_index_page", type: :feature do
     it "When I visit '/vehicles', I see a link to add a new adoptable Vehicle for that parent 'Create Vehicle' which allows me to make a new vehicle" do
       visit "/dealerships/#{@dealer_2.id}/vehicles"
       vehicle_name = "Explorer"
+      vehicle_cylinders = 6
+      vehicle_hp = 400
+      vehicle_tq = 415
 
       click_link "Create Vehicle"
 
@@ -52,16 +55,22 @@ RSpec.describe "Dealership_vehicles_index_page", type: :feature do
       expect(page.has_field?).to eq true
 
       fill_in "vehicle[name]", with: vehicle_name
-      fill_in "vehicle[cylinder_count]", with: 6
-      fill_in "vehicle[horsepower]", with: 400
-      fill_in "vehicle[torque]", with: 415
+      fill_in "vehicle[cylinder_count]", with: vehicle_cylinders
+      fill_in "vehicle[horsepower]", with: vehicle_hp
+      fill_in "vehicle[torque]", with: vehicle_tq
       check "vehicle[luxury_model]"
 
       click_on "Create Vehicle"
 
       expect(current_url).to eq("http://www.example.com/dealerships/#{@dealer_2.id}/vehicles")
 
-      expect(page).to have_content("#{Vehicle.last.name}")
+      within "#id_#{Vehicle.last.id}" do
+        expect(page).to have_content("Vehicle name: #{vehicle_name}")
+        expect(page).to have_content("Vehicle cylinder count: #{vehicle_cylinders}")
+        expect(page).to have_content("This vehicle has the luxury model: true")
+        expect(page).to have_content("Vehicle horsepower: #{vehicle_hp}")
+        expect(page).to have_content("Vehicle torque: #{vehicle_tq}")
+      end
     end
   end
 end

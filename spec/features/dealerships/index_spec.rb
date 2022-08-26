@@ -36,6 +36,7 @@ RSpec.describe "Dealership index_page", type: :feature do
     it 'New dealership link in index is present, takes user to "/parents/new" to where they can submit a form that updates the DB' do
       visit "/dealerships"
       dealer_name = "Audi"
+      dealer_lot_size = 30
 
       click_link "New Dealership"
 
@@ -44,7 +45,7 @@ RSpec.describe "Dealership index_page", type: :feature do
       expect(page.has_field?).to eq true
 
       fill_in "dealer[name]", with: dealer_name
-      fill_in "dealer[lot_size]", with: "30"
+      fill_in "dealer[lot_size]", with: dealer_lot_size
       check "dealer[service_center]"
       uncheck "dealer[car_wash]"
 
@@ -52,7 +53,10 @@ RSpec.describe "Dealership index_page", type: :feature do
 
       expect(current_url).to eq("http://www.example.com/dealerships")
 
-      expect(page).to have_content("#{Dealership.last.name}")
+      within "#id_#{Dealership.last.id}" do
+        expect(page).to have_content("Dealership name: #{dealer_name}")
+        expect(page).to have_content(Dealership.last.created_at)
+      end
     end
   end
 end

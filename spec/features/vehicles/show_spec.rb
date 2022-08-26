@@ -38,6 +38,9 @@ RSpec.describe "Vehicle show_page", type: :feature do
     it "When I visit '/vehicles/:id' I see a link to update that vehicle which takes me to '/vehicles/:id/edit' so I can update the vehicle" do
       visit "/vehicles/#{@vehicle_1.id}"
       vehicle_name = "GR86"
+      vehicle_cylinders = 4
+      vehicle_hp = 228
+      vehicle_tq = 200
 
       click_link "Update Vehicle"
 
@@ -46,20 +49,22 @@ RSpec.describe "Vehicle show_page", type: :feature do
       expect(page.has_field?).to eq true
 
       fill_in "vehicle[name]", with: vehicle_name
-      fill_in "vehicle[cylinder_count]", with: 4
-      fill_in "vehicle[horsepower]", with: 228
-      fill_in "vehicle[torque]", with: 200
+      fill_in "vehicle[cylinder_count]", with: vehicle_cylinders
+      fill_in "vehicle[horsepower]", with: vehicle_hp
+      fill_in "vehicle[torque]", with: vehicle_tq
       check "vehicle[luxury_model]"
 
       click_on "Update Vehicle"
 
       expect(current_url).to eq("http://www.example.com/vehicles/#{@vehicle_1.id}")
 
-
-      expect(page).to have_content("#{vehicle_name}")
-      expect(page).to have_content(4)
-      expect(page).to have_content(228)
-      expect(page).to have_content(200)
+      within "#id_#{@vehicle_1.id}" do
+        expect(page).to have_content("Vehicle name: #{vehicle_name}")
+        expect(page).to have_content("Vehicle cylinder count: #{vehicle_cylinders}")
+        expect(page).to have_content("This vehicle has the luxury model: #{true}")
+        expect(page).to have_content("Vehicle horsepower: #{vehicle_hp}")
+        expect(page).to have_content("Vehicle torque: #{vehicle_tq}")
+      end
     end
   end
 end
