@@ -1,4 +1,5 @@
 <h1>All Dealerships</h1>
+<a href="/dealerships/new">New Dealership</a>
 
 <% @dealerships.each do |dealer| %>
   <p id="id_<%= dealer.id %>">Dealership name: <%= link_to dealer.name, "/dealerships/#{dealer.id}"%></p>
