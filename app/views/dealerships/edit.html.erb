@@ -1,22 +1,23 @@
 <h1>Update Dealership</h1>
 
-<p>Update the Dealership</p>
 <form action="/dealerships/<%= @dealer.id %>" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <input type="hidden" name="_method" value="PATCH" />
-  <p>Enter a new dealership:</p>
-
-  <label for="name">Dealer name:</label>
-  <input id="name" type='text' name='dealer[name]' required/><br/>
-
-  <label for="lot_size">Dealer lot size:</label>
-  <input id="lot_size" type='text' name='dealer[lot_size]' required/><br/>
-
-  <label for="service_center">Dealer service center:</label>
-  <input id="service_center" type='checkbox' name='dealer[service_center]'/><br/>
-
-  <label for="car_wash">Dealer car wash:</label>
-  <input id="car_wash" type='checkbox' name='dealer[car_wash]'/><br/>
-
-  <input type='submit' value="Update Dealership"/>
+  <div class="mb-3">
+    <label for="name" class="form-label">Dealer name:</label>
+    <input type="text" class="form-control" id="name" name='dealer[name]' required>
+  </div>
+  <div class="mb-3">
+    <label for="lot_size" class="form-label">Dealer lot size:</label>
+    <input type="text" class="form-control" id="lot_size" name='dealer[lot_size]' required>
+  </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="service_center" name='dealer[service_center]'>
+    <label class="form-check-label" for="service_center">Dealer service center</label>
+  </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="car_wash" name='dealer[car_wash]'>
+    <label class="form-check-label" for="car_wash">Dealer car wash</label>
+  </div>
+  <input type='submit' value="Update Dealership" class="btn btn-success"/>
 </form>

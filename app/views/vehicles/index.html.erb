@@ -1,17 +1,19 @@
 <h1>All Vehicles</h1>
 
 <% @vehicles.each do |vehicle| %>
-  <div id="id_<%= vehicle.id %>">
-    <p>Vehicle name: <%= vehicle.name %></p>
+  <div id="id_<%= vehicle.id %>" class="d-flex align-items-center justify-content-center flex-column mt-5">
+    <h5>Vehicle name: <%= link_to vehicle.name, "/vehicles/#{vehicle.id}", class: "link-success"%></h5>
     <p>Vehicle cylinder count: <%= vehicle.cylinder_count %></p>
     <p>This vehicle has the luxury model: <%= vehicle.luxury_model %></p>
     <p>Vehicle horsepower: <%= vehicle.horsepower %></p>
     <p>Vehicle torque: <%= vehicle.torque %></p>
-    <form action="/vehicles/<%= vehicle.id %>" method="POST">
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-      <input type="hidden" name="_method" value="DELETE">
-      <input type="submit" value="Delete vehicle"/>
-    </form>
-    <%= link_to "Update Vehicle", "/vehicles/#{vehicle.id}/edit" %>
+    <div class="btn-group" role="group">
+      <form action="/vehicles/<%= vehicle.id %>" method="POST">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete vehicle" class="mx-1 btn btn-danger">
+      </form>
+      <%= link_to "Update Vehicle", "/vehicles/#{vehicle.id}/edit", class: "mx-1 btn btn-warning" %>
+    </div>
   </div>
 <% end %>
