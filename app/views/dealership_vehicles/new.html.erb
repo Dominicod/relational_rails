@@ -1,0 +1,24 @@
+<h1>New Vehicle</h1>
+
+<p>Create new Vehicle</p>
+<form action="/dealerships/<%= @dealer.id %>/vehicles" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <p>Enter a new vehicle:</p>
+
+  <label for="name">Vehicle name:</label>
+  <input id="name" type='text' name='vehicle[name]' required/><br/>
+
+  <label for="cylinder_count">Vehicle cylinder count:</label>
+  <input id="cylinder_count" type='text' name='vehicle[cylinder_count]' required/><br/>
+
+  <label for="horsepower">Vehicle horsepower:</label>
+  <input id="horsepower" type='text' name='vehicle[horsepower]' required/><br/>
+
+  <label for="torque">Vehicle torque:</label>
+  <input id="torque" type='text' name='vehicle[torque]' required/><br/>
+
+  <label for="luxury_model">Luxury model:</label>
+  <input id="luxury_model" type='checkbox' name='vehicle[luxury_model]'/><br/>
+
+  <input type='submit' value="Create Vehicle"/>
+</form>

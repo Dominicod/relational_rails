@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Dealership, type: :feature do
+RSpec.describe "Dealership index_page", type: :feature do
   before(:each) do
     @dealer_1 = Dealership.create!(name: "Toyota", vehicle_lot_size: 10, service_center: true, car_wash: false)
     @dealer_2 = Dealership.create!(name: "Ford", vehicle_lot_size: 12, service_center: true, car_wash: true)
@@ -31,6 +31,45 @@ RSpec.describe Dealership, type: :feature do
       expect(page).to have_content(@dealer_1.created_at)
       expect(page).to have_content(@dealer_2.created_at)
       expect(page).to have_content(@dealer_3.created_at)
+    end
+
+    it 'New dealership link in index is present, takes user to "/parents/new" to where they can submit a form that updates the DB' do
+      visit "/dealerships"
+      dealer_name = "Audi"
+      dealer_lot_size = 30
+
+      click_link "New Dealership"
+
+      expect(current_url).to eq("http://www.example.com/dealerships/new")
+
+      expect(page.has_field?).to eq true
+
+      fill_in "dealer[name]", with: dealer_name
+      fill_in "dealer[lot_size]", with: dealer_lot_size
+      check "dealer[service_center]"
+      uncheck "dealer[car_wash]"
+
+      click_on "Create Dealership"
+
+      expect(current_url).to eq("http://www.example.com/dealerships")
+
+      within "#id_#{Dealership.last.id}" do
+        expect(page).to have_content("Dealership name: #{dealer_name}")
+        expect(page).to have_content(Dealership.last.created_at)
+      end
+    end
+
+    it 'I can click a update dealership button from the dealership index page' do
+      dealerships = [@dealer_1, @dealer_2, @dealer_3]
+      dealerships.each do |dealer|
+        visit "/dealerships"
+        within "#id_#{dealer.id}" do
+          expect(page.has_link?).to eq true
+          click_link "Update Dealership"
+
+          expect(current_url).to eq("http://www.example.com/dealerships/#{dealer.id}/edit")
+        end
+      end
     end
   end
 end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Dealership, type: :feature do
+RSpec.describe "Dealership show_page", type: :feature do
   before(:each) do
     @dealer_1 = Dealership.create!(name: "Toyota", vehicle_lot_size: 10, service_center: true, car_wash: false)
     @dealer_2 = Dealership.create!(name: "Ford", vehicle_lot_size: 12, service_center: true, car_wash: true)
@@ -38,6 +38,34 @@ RSpec.describe Dealership, type: :feature do
       visit "/dealerships/#{@dealer_2.id}"
 
       expect(page).to have_content("Current vehicle count: #{@dealer_2.vehicles.count}")
+    end
+
+    it 'Update Dealership link in show page is present, takes user to "/parents/:id/edit" to where they can submit a form that edits the DB' do
+      visit "/dealerships/#{@dealer_1.id}"
+      dealer_name = "Suzuki"
+      dealer_lot_size = 50
+
+      click_link "Update Dealership"
+
+      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealer_1.id}/edit")
+
+      expect(page.has_field?).to eq true
+
+      fill_in "dealer[name]", with: dealer_name
+      fill_in "dealer[lot_size]", with: dealer_lot_size
+      uncheck "dealer[service_center]"
+      check "dealer[car_wash]"
+
+      click_on "Update Dealership"
+
+      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealer_1.id}")
+
+      within "#id_#{@dealer_1.id}" do
+        expect(page).to have_content("Dealership name: #{dealer_name}")
+        expect(page).to have_content("Dealership lot size: #{dealer_lot_size}")
+        expect(page).to have_content("Service center: #{false}")
+        expect(page).to have_content("Car-wash center: #{true}")
+      end
     end
   end
 end

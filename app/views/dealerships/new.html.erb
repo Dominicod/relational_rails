@@ -1,0 +1,21 @@
+<h1>New Dealership</h1>
+
+<p>Create new Dealership</p>
+<form action="/dealerships" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <p>Enter a new dealership:</p>
+
+  <label for="name">Dealer name:</label>
+  <input id="name" type='text' name='dealer[name]' required/><br/>
+
+  <label for="lot_size">Dealer lot size:</label>
+  <input id="lot_size" type='text' name='dealer[lot_size]' required/><br/>
+
+  <label for="service_center">Dealer service center:</label>
+  <input id="service_center" type='checkbox' name='dealer[service_center]'/><br/>
+
+  <label for="car_wash">Dealer car wash:</label>
+  <input id="car_wash" type='checkbox' name='dealer[car_wash]'/><br/>
+
+  <input type='submit' value="Create Dealership"/>
+</form>

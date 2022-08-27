@@ -1,11 +1,12 @@
 <h1>All Vehicles</h1>
 
 <% @vehicles.each do |vehicle| %>
-  <div id="vehicle-<%= vehicle.id %>">
+  <div id="id_<%= vehicle.id %>">
     <p>Vehicle name: <%= vehicle.name %></p>
     <p>Vehicle cylinder count: <%= vehicle.cylinder_count %></p>
     <p>This vehicle has the luxury model: <%= vehicle.luxury_model %></p>
     <p>Vehicle horsepower: <%= vehicle.horsepower %></p>
     <p>Vehicle torque: <%= vehicle.torque %></p>
+    <%= link_to "Update Vehicle", "/vehicles/#{vehicle.id}/edit" %>
   </div>
 <% end %>

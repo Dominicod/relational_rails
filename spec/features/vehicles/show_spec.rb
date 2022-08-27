@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Vehicle, type: :feature do
+RSpec.describe "Vehicle show_page", type: :feature do
   before(:each) do
     @dealer_1 = Dealership.create!(name: "Toyota", vehicle_lot_size: 10, service_center: true, car_wash: false)
     @dealer_2 = Dealership.create!(name: "Ford", vehicle_lot_size: 12, service_center: true, car_wash: true)
@@ -33,6 +33,38 @@ RSpec.describe Vehicle, type: :feature do
       expect(page).to_not have_content("Vehicle name: #{@vehicle_3.name}")
       expect(page).to_not have_content("Vehicle name: #{@vehicle_1.name}")
       expect(page).to_not have_content("Vehicle name: #{@vehicle_4.name}")
+    end
+
+    it "When I visit '/vehicles/:id' I see a link to update that vehicle which takes me to '/vehicles/:id/edit' so I can update the vehicle" do
+      visit "/vehicles/#{@vehicle_1.id}"
+      vehicle_name = "GR86"
+      vehicle_cylinders = 4
+      vehicle_hp = 228
+      vehicle_tq = 200
+
+      click_link "Update Vehicle"
+
+      expect(current_url).to eq("http://www.example.com/vehicles/#{@vehicle_1.id}/edit")
+
+      expect(page.has_field?).to eq true
+
+      fill_in "vehicle[name]", with: vehicle_name
+      fill_in "vehicle[cylinder_count]", with: vehicle_cylinders
+      fill_in "vehicle[horsepower]", with: vehicle_hp
+      fill_in "vehicle[torque]", with: vehicle_tq
+      check "vehicle[luxury_model]"
+
+      click_on "Update Vehicle"
+
+      expect(current_url).to eq("http://www.example.com/vehicles/#{@vehicle_1.id}")
+
+      within "#id_#{@vehicle_1.id}" do
+        expect(page).to have_content("Vehicle name: #{vehicle_name}")
+        expect(page).to have_content("Vehicle cylinder count: #{vehicle_cylinders}")
+        expect(page).to have_content("This vehicle has the luxury model: #{true}")
+        expect(page).to have_content("Vehicle horsepower: #{vehicle_hp}")
+        expect(page).to have_content("Vehicle torque: #{vehicle_tq}")
+      end
     end
   end
 end
