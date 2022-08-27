@@ -67,7 +67,7 @@ RSpec.describe "Vehicle show_page", type: :feature do
       end
     end
 
-    it 'I can delete dealerships from the dealership show page' do
+    it 'I can delete vehicles from the vehicle show page' do
       visit "/vehicles/#{@vehicle_2.id}"
 
       click_button "Delete vehicle"
