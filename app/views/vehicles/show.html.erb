@@ -1,13 +1,16 @@
-<div id="id_<%= @vehicle.id %>">
-  <p>Vehicle name: <%= @vehicle.name %></p>
+<div id="id_<%= @vehicle.id %>" class="d-flex align-items-center justify-content-center flex-column">
+  <h5>Vehicle name: <span class="text-success"><%= @vehicle.name %></span></h5>
+  <h5>Vehicle dealership location: <%= link_to @vehicle.dealership.name, "/dealerships/#{@vehicle.dealership.id}", class: "link-primary"%></h5>
   <p>Vehicle cylinder count: <%= @vehicle.cylinder_count %></p>
   <p>This vehicle has the luxury model: <%= @vehicle.luxury_model %></p>
   <p>Vehicle horsepower: <%= @vehicle.horsepower %></p>
   <p>Vehicle torque: <%= @vehicle.torque %></p>
 </div>
-<form action="/vehicles/<%= @vehicle.id %>" method="POST">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <input type="hidden" name="_method" value="DELETE">
-  <input type="submit" value="Delete vehicle"/>
-</form>
-<%= link_to "Update Vehicle","/vehicles/#{@vehicle.id}/edit" %>
+<div class="btn-group" role="group">
+  <form action="/vehicles/<%= @vehicle.id %>" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete vehicle" class="mx-1 btn btn-danger">
+  </form>
+  <%= link_to "Update Vehicle", "/vehicles/#{@vehicle.id}/edit", class: "mx-1 btn btn-warning" %>
+</div>

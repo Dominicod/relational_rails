@@ -1,20 +1,22 @@
 <h1>All vehicles list</h1>
-<%= link_to "Create Vehicle", "/dealerships/#{@dealer.id}/vehicles/new" %>
+<%= link_to "Create Vehicle", "/dealerships/#{@dealer.id}/vehicles/new", class: 'btn btn-success' %>
 
 <% @vehicles.each do |vehicle| %>
-  <div id="id_<%= vehicle.id %>">
-    <p>Vehicle name: <%= vehicle.name %></p>
+  <div id="id_<%= vehicle.id %>" class="d-flex align-items-center justify-content-center flex-column mt-5">
+    <h5>Vehicle name: <%= link_to vehicle.name, "/vehicles/#{vehicle.id}", class: "link-success"%></h5>
     <p>Vehicle cylinder count: <%= vehicle.cylinder_count %></p>
     <p>This vehicle has the luxury model: <%= vehicle.luxury_model %></p>
     <p>Vehicle horsepower: <%= vehicle.horsepower %></p>
     <p>Vehicle torque: <%= vehicle.torque %></p>
   </div>
 <% end %>
+<%= link_to "Sort alphabetically by Name", "/dealerships/#{@dealer.id}/alphabetical/vehicles/", class: "btn btn-success m-2" %>
 <form action="/dealerships/<%= @dealer.id %>/vehicles" method="POST">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <input type="hidden" name="_method" value="PATCH">
-  <label for="threshold">Threshold number:</label>
-  <input type="text" name="threshold" id="threshold" required>
-  <input type="submit" value="Only return records with more than `number` of cylinders."/>
+  <div class="mb-3 mt-3">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="hidden" name="_method" value="PATCH">
+    <label for="threshold" class="form-label">Threshold number:</label>
+    <input type="text" class="form-control" id="threshold" name="threshold">
+  </div>
+  <input type="submit" value="Only return records with more than `number` of cylinders." class="btn btn-primary"/>
 </form>
-<%= link_to "Sort alphabetically by Name", "/dealerships/#{@dealer.id}/alphabetical/vehicles/" %>

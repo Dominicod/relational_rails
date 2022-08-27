@@ -1,15 +1,17 @@
 <h1>All Dealerships</h1>
-<%= link_to "New Dealership","/dealerships/new" %>
+<%= link_to "New Dealership","/dealerships/new", class: "btn btn-success" %>
 
 <% @dealerships.each do |dealer| %>
-  <div id="id_<%= dealer.id %>">
-    <p>Dealership name: <%= link_to dealer.name, "/dealerships/#{dealer.id}"%></p>
+  <div id="id_<%= dealer.id %>" class="d-flex align-items-center justify-content-center flex-column mt-5">
+    <h5>Dealership name: <%= link_to dealer.name, "/dealerships/#{dealer.id}", class: "link-success"%></h5>
     <p>Created: <%= dealer.created_at %></p>
-    <form action="/dealerships/<%= dealer.id %>" method="POST">
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-      <input type="hidden" name="_method" value="DELETE">
-      <input type="submit" value="Delete Dealership"/>
-    </form>
-    <%= link_to "Update Dealership", "/dealerships/#{dealer.id}/edit" %>
+    <div class="btn-group" role="group">
+      <form action="/dealerships/<%= dealer.id %>" method="POST">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete Dealership" class="mx-1 btn btn-danger">
+      </form>
+      <%= link_to "Update Dealership", "/dealerships/#{dealer.id}/edit", class: "mx-1 btn btn-warning"%>
+    </div>
   </div>
 <% end %>
