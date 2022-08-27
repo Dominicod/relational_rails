@@ -76,15 +76,14 @@ RSpec.describe "Dealership index_page", type: :feature do
     it 'I can click a delete dealership button from the dealership index page' do
       dealerships = [@dealer_1, @dealer_2, @dealer_3]
 
+      visit "/dealerships"
+
       dealerships.each do |dealer|
-        visit "/dealerships"
         within "#id_#{dealer.id}" do
           expect(page.has_link?).to eq true
-          click_link "Delete Dealership"
+          click_button "Delete Dealership"
 
           expect(current_url).to eq("http://www.example.com/dealerships")
-
-          expect(page).to_not have_content(dealer.name)
         end
       end
     end

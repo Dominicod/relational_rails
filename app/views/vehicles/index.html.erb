@@ -7,6 +7,11 @@
     <p>This vehicle has the luxury model: <%= vehicle.luxury_model %></p>
     <p>Vehicle horsepower: <%= vehicle.horsepower %></p>
     <p>Vehicle torque: <%= vehicle.torque %></p>
+    <form action="/vehicles/<%= vehicle.id %>" method="POST">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="_method" value="DELETE">
+      <input type="submit" value="Delete vehicle"/>
+    </form>
     <%= link_to "Update Vehicle", "/vehicles/#{vehicle.id}/edit" %>
   </div>
 <% end %>
