@@ -1,5 +1,5 @@
 <h1>All vehicles list</h1>
-<%= link_to "Create Vehicle", "/dealerships/#{@vehicles.first.dealership_id}/vehicles/new" %>
+<%= link_to "Create Vehicle", "/dealerships/#{@dealer.id}/vehicles/new" %>
 
 <% @vehicles.each do |vehicle| %>
   <div id="id_<%= vehicle.id %>">
@@ -10,4 +10,11 @@
     <p>Vehicle torque: <%= vehicle.torque %></p>
   </div>
 <% end %>
-<%= link_to "Sort alphabetically by Name", "/dealerships/#{@vehicles.first.dealership_id}/alphabetical/vehicles/" %>
+<form action="/dealerships/<%= @dealer.id %>/vehicles" method="POST">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="PATCH">
+  <label for="threshold">Threshold number:</label>
+  <input type="text" name="threshold" id="threshold" required>
+  <input type="submit" value="Only return records with more than `number` of cylinders."/>
+</form>
+<%= link_to "Sort alphabetically by Name", "/dealerships/#{@dealer.id}/alphabetical/vehicles/" %>

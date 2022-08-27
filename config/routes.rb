@@ -8,9 +8,11 @@ Rails.application.routes.draw do
   delete '/dealerships/:id', to: 'dealerships#destroy'
   get '/dealerships/:id/edit', to: 'dealerships#edit'
   patch '/dealerships/:id', to: 'dealerships#update'
+
   get '/dealerships/:id/vehicles', to: 'dealership_vehicles#index'
   get '/dealerships/:id/vehicles/new', to: 'dealership_vehicles#new'
   post '/dealerships/:id/vehicles', to: 'dealership_vehicles#create'
+  patch '/dealerships/:id/vehicles', to: 'dealership_vehicles#index'
   get '/dealerships/:id/:alphabetical/vehicles', to: 'dealership_vehicles#index'
 
   get '/vehicles', to: 'vehicles#index'

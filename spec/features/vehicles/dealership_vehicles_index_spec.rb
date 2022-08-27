@@ -73,7 +73,7 @@ RSpec.describe "Dealership_vehicles_index_page", type: :feature do
       end
     end
 
-    it "When I visit '/dealerships/:dealership_id/vehicles', I see the vehicles in alphabetical order by name" do
+    it "When I visit '/dealerships/:dealership_id/vehicles', I see the vehicles in alphabetical order by name when I click a button" do
       visit "/dealerships/#{@dealer_1.id}/vehicles"
 
       click_link "Sort alphabetically by Name"

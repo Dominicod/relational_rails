@@ -4,8 +4,13 @@ class DealershipVehiclesController < ApplicationController
   end
 
   def index
-    dealer = Dealership.find(params[:id])
-    params[:alphabetical] == "alphabetical" ? @vehicles = dealer.vehicles.order(:name) : @vehicles = dealer.vehicles
+    @dealer = Dealership.find(params[:id])
+
+    if params[:_method] == "PATCH"
+      @vehicles = @dealer.vehicles.where("cylinder_count > #{params[:threshold]}")
+    else
+      params[:alphabetical] == "alphabetical" ? @vehicles = @dealer.vehicles.order(:name) : @vehicles = @dealer.vehicles
+    end
   end
 
   def create
