@@ -95,7 +95,7 @@ RSpec.describe "Dealership_vehicles_index_page", type: :feature do
 
       click_on "Only return records with more than `number` of cylinders."
 
-      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealer_1.id}/vehicles/")
+      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealer_1.id}/vehicles")
 
       expect(page).to_not have_content(@vehicle_2.name)
     end
