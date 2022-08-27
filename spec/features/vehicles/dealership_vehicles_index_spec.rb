@@ -81,7 +81,7 @@ RSpec.describe "Dealership_vehicles_index_page", type: :feature do
       vehicle_supra = find("#id_#{@vehicle_1.id}")
       vehicle_rav_4 = find("#id_#{@vehicle_2.id}")
 
-      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealer_1.id}/true/vehicles/")
+      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealer_1.id}/alphabetical/vehicles/")
 
       expect(vehicle_rav_4).to appear_before(vehicle_supra)
     end
