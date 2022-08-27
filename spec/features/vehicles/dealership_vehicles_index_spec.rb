@@ -85,5 +85,19 @@ RSpec.describe "Dealership_vehicles_index_page", type: :feature do
 
       expect(vehicle_rav_4).to appear_before(vehicle_supra)
     end
+
+    it "When I visit '/dealerships/:dealership_id/vehicles', I see a form that allows me to display records over a given threshold." do
+      visit "/dealerships/#{@dealer_1.id}/vehicles"
+
+      expect(page.has_field?).to eq true
+
+      fill_in "threshold", with: 4
+
+      click_on "Only return records with more than `number` of cylinders."
+
+      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealer_1.id}/vehicles/")
+
+      expect(page).to_not have_content(@vehicle_2.name)
+    end
   end
 end
