@@ -9,6 +9,11 @@ class DealershipsController < ApplicationController
     redirect_to "/dealerships"
   end
 
+  def destroy
+    Dealership.destroy(params[:id])
+    redirect_to "/dealerships"
+  end
+
   def index
     @dealerships = Dealership.all.order(:created_at)
   end

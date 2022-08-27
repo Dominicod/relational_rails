@@ -5,6 +5,11 @@
   <div id="id_<%= dealer.id %>">
     <p>Dealership name: <%= link_to dealer.name, "/dealerships/#{dealer.id}"%></p>
     <p>Created: <%= dealer.created_at %></p>
+    <form action="/dealerships/<%= dealer.id %>" method="POST">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="_method" value="DELETE">
+      <input type="submit" value="Delete Dealership"/>
+    </form>
     <%= link_to "Update Dealership", "/dealerships/#{dealer.id}/edit" %>
   </div>
 <% end %>

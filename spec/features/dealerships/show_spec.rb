@@ -67,5 +67,15 @@ RSpec.describe "Dealership show_page", type: :feature do
         expect(page).to have_content("Car-wash center: #{true}")
       end
     end
+
+    it 'I can delete dealerships from the dealership show page' do
+      visit "/dealerships/#{@dealer_2.id}"
+
+      click_button "Delete Dealership"
+
+      expect(current_url).to eq("http://www.example.com/dealerships")
+
+      expect(page).to_not have_content("Dealership name: #{@dealer_2.name}")
+    end
   end
 end

@@ -14,6 +14,11 @@ class VehiclesController < ApplicationController
     @vehicle = Vehicle.find(params[:id])
   end
 
+  def destroy
+    Vehicle.destroy(params[:id])
+    redirect_to "/vehicles"
+  end
+
   def update
     vehicle = Vehicle.find(params[:id])
     vehicle.update(name: v_params[:name], cylinder_count: v_params[:cylinder_count],
