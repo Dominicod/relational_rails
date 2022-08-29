@@ -11,7 +11,7 @@
   </div>
 <% end %>
 <%= link_to "Sort alphabetically by Name", "/dealerships/#{@dealer.id}/alphabetical/vehicles/", class: "btn btn-success m-2" %>
-<form action="/dealerships/<%= @dealer.id %>/vehicles" method="POST">
+<form action="/dealerships/<%= @dealer.id %>/vehicles" method="post">
   <div class="mb-3 mt-3">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
     <input type="hidden" name="_method" value="PATCH">

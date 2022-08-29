@@ -47,7 +47,7 @@ RSpec.describe "Dealership show_page", type: :feature do
 
       click_link "Update Dealership"
 
-      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealer_1.id}/edit")
+      expect(current_path).to eq("/dealerships/#{@dealer_1.id}/edit")
 
       expect(page.has_field?).to eq true
 
@@ -58,7 +58,7 @@ RSpec.describe "Dealership show_page", type: :feature do
 
       click_on "Update Dealership"
 
-      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealer_1.id}")
+      expect(current_path).to eq("/dealerships/#{@dealer_1.id}")
 
       within "#id_#{@dealer_1.id}" do
         expect(page).to have_content("Dealership name: #{dealer_name}")
@@ -73,7 +73,7 @@ RSpec.describe "Dealership show_page", type: :feature do
 
       click_button "Delete Dealership"
 
-      expect(current_url).to eq("http://www.example.com/dealerships")
+      expect(current_path).to eq("/dealerships")
 
       expect(page).to_not have_content("Dealership name: #{@dealer_2.name}")
     end

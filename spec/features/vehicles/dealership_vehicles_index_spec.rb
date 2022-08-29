@@ -50,7 +50,7 @@ RSpec.describe "Dealership_vehicles_index_page", type: :feature do
 
       click_link "Create Vehicle"
 
-      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealer_2.id}/vehicles/new")
+      expect(current_path).to eq("/dealerships/#{@dealer_2.id}/vehicles/new")
 
       expect(page.has_field?).to eq true
 
@@ -62,7 +62,7 @@ RSpec.describe "Dealership_vehicles_index_page", type: :feature do
 
       click_on "Create Vehicle"
 
-      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealer_2.id}/vehicles")
+      expect(current_path).to eq("/dealerships/#{@dealer_2.id}/vehicles")
 
       within "#id_#{Vehicle.last.id}" do
         expect(page).to have_content("Vehicle name: #{vehicle_name}")
@@ -81,7 +81,7 @@ RSpec.describe "Dealership_vehicles_index_page", type: :feature do
       vehicle_supra = find("#id_#{@vehicle_1.id}")
       vehicle_rav_4 = find("#id_#{@vehicle_2.id}")
 
-      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealer_1.id}/alphabetical/vehicles/")
+      expect(current_path).to eq("/dealerships/#{@dealer_1.id}/alphabetical/vehicles/")
 
       expect(vehicle_rav_4).to appear_before(vehicle_supra)
     end
@@ -95,7 +95,7 @@ RSpec.describe "Dealership_vehicles_index_page", type: :feature do
 
       click_on "Only return records with more than `number` of cylinders."
 
-      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealer_1.id}/vehicles")
+      expect(current_path).to eq("/dealerships/#{@dealer_1.id}/vehicles")
 
       expect(page).to_not have_content(@vehicle_2.name)
     end
