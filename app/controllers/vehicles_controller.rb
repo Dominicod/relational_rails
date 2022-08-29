@@ -21,18 +21,13 @@ class VehiclesController < ApplicationController
 
   def update
     vehicle = Vehicle.find(params[:id])
-    vehicle.update(name: v_params[:name], cylinder_count: v_params[:cylinder_count],
-      horsepower: v_params[:horsepower], torque: v_params[:torque],
-      luxury_model: v_params[:luxury_model])
+    vehicle.update(vehicle_params)
 
     redirect_to "/vehicles/#{vehicle.id}"
   end
 
-  private
-
-  def v_params
-    {name: params[:vehicle][:name], cylinder_count: params[:vehicle][:cylinder_count],
-     horsepower: params[:vehicle][:horsepower], torque: params[:vehicle][:torque],
-     luxury_model: params[:vehicle][:luxury_model] ? true : false}
+  private # fix boolean
+  def vehicle_params # convert boolean to a radio
+    params.permit(:name, :cylinder_count, :horsepower, :torque, :luxury_model)
   end
 end
