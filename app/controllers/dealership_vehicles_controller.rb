@@ -6,7 +6,7 @@ class DealershipVehiclesController < ApplicationController
   def index # move this to model
     @dealer = Dealership.find(params[:id])
 
-    if params[:_method] == "PATCH"
+    if params[:_method] == "patch"
       @vehicles = @dealer.vehicles.where("cylinder_count > #{params[:threshold]}")
     else
       params[:alphabetical] == "alphabetical" ? @vehicles = @dealer.vehicles.order(:name) : @vehicles = @dealer.vehicles

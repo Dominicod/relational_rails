@@ -6,12 +6,10 @@
     <h5>Dealership name: <%= link_to dealer.name, "/dealerships/#{dealer.id}", class: "link-success"%></h5>
     <p>Created: <%= dealer.created_at %></p>
     <div class="btn-group" role="group">
-      <form action="/dealerships/<%= dealer.id %>" method="POST">
-        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-        <input type="hidden" name="_method" value="DELETE">
-        <input type="submit" value="Delete Dealership" class="mx-1 btn btn-danger">
-      </form>
-      <%= link_to "Update Dealership", "/dealerships/#{dealer.id}/edit", class: "mx-1 btn btn-warning"%>
+      <%= form_with url: "/dealerships/#{dealer.id}", method: :delete, local: true, authenticity_token: form_authenticity_token do |form| %>
+        <%= form.submit "Delete Dealership", class: "mx-1 btn btn-danger" %>
+      <% end %>
+      <%= link_to "Update Dealership", "/dealerships/#{dealer.id}/edit", class: "mx-1 btn btn-warning rounded"%>
     </div>
   </div>
 <% end %>

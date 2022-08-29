@@ -1,27 +1,33 @@
 <h1>Update Vehicle</h1>
 
-<form action="/vehicles/<%= @vehicle.id %>" method="post">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <input type="hidden" name="_method" value="PATCH" />
+<%= form_with url: "/vehicles/#{@vehicle.id}", method: :patch, local: true, authenticity_token: form_authenticity_token do |form| %>
   <div class="mb-3">
-    <label for="name" class="form-label">Vehicle name:</label>
-    <input id="name" class="form-control" type='text' name='vehicle[name]' required/>
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control", placeholder: "Vehicle name...", required: true %>
   </div>
   <div class="mb-3">
-    <label for="cylinder_count" class="form-label">Vehicle cylinder count:</label>
-    <input id="cylinder_count" type='text' name='vehicle[cylinder_count]' class="form-control" required/>
+    <%= form.label :cylinder_count, class: "form-label" %>
+    <%= form.number_field :cylinder_count, class: "form-control", placeholder: "Vehicle cylinders...", required: true %>
   </div>
   <div class="mb-3">
-    <label for="horsepower" class="form-label">Vehicle horsepower:</label>
-    <input id="horsepower" class="form-control" type='text' name='vehicle[horsepower]' required/>
+    <%= form.label :horsepower, class: "form-label" %>
+    <%= form.number_field :horsepower, class: "form-control", placeholder: "Vehicle horsepower...", required: true %>
   </div>
   <div class="mb-3">
-    <label for="torque" class="form-label">Vehicle torque:</label>
-    <input id="torque" class="form-control" type='text' name='vehicle[torque]' required/>
+    <%= form.label :torque, class: "form-label" %>
+    <%= form.number_field :torque, class: "form-control", placeholder: "Vehicle torque...", required: true %>
   </div>
-  <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="luxury_model" name='vehicle[luxury_model]'>
-    <label class="form-check-label" for="luxury_model">Luxury model</label>
+  <div class="mb-3 p-3 rounded" style="background-color: #37393a">
+    <div class="form-check">
+      <%= form.radio_button :luxury_model, true, class: "form-check-input" %>
+      <%= form.label :luxury_model_true, "Is a luxury model", class: "form-check-label" %>
+    </div>
+    <div class="form-check">
+      <%= form.radio_button :luxury_model, false, class: "form-check-input", checked: true %>
+      <%= form.label :luxury_model_false, "Isn't a luxury model", class: "form-check-label" %>
+    </div>
   </div>
-  <input type='submit' value="Update Vehicle" class="btn btn-success"/>
-</form>
+  <div class="d-flex align-items-center justify-content-center">
+    <%= form.submit "Update Vehicle", class: "btn btn-success" %>
+  </div>
+<% end %>
