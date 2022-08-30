@@ -6,4 +6,12 @@ class Dealership < ApplicationRecord
   def vehicles_count
     vehicles.count
   end
+
+  def alphabetical_vehicles
+    vehicles.order(:name)
+  end
+
+  def cylinder_threshold(threshold)
+    vehicles.where("cylinder_count > #{threshold}")
+  end
 end
