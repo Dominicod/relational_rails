@@ -41,38 +41,6 @@ RSpec.describe "Dealership_vehicles_index_page", type: :feature do
       expect(page).to_not have_content("Vehicle name: #{@vehicle_2.name}")
     end
 
-    it "When I visit '/dealerships/:dealership_id/vehicles', I see a link to add a new adoptable Vehicle for that parent 'Create Vehicle' which allows me to make a new vehicle" do
-      visit "/dealerships/#{@dealer_2.id}/vehicles"
-      vehicle_name = "Explorer"
-      vehicle_cylinders = 6
-      vehicle_hp = 400
-      vehicle_tq = 415
-
-      click_link "Create Vehicle"
-
-      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealer_2.id}/vehicles/new")
-
-      expect(page.has_field?).to eq true
-
-      fill_in "vehicle[name]", with: vehicle_name
-      fill_in "vehicle[cylinder_count]", with: vehicle_cylinders
-      fill_in "vehicle[horsepower]", with: vehicle_hp
-      fill_in "vehicle[torque]", with: vehicle_tq
-      check "vehicle[luxury_model]"
-
-      click_on "Create Vehicle"
-
-      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealer_2.id}/vehicles")
-
-      within "#id_#{Vehicle.last.id}" do
-        expect(page).to have_content("Vehicle name: #{vehicle_name}")
-        expect(page).to have_content("Vehicle cylinder count: #{vehicle_cylinders}")
-        expect(page).to have_content("This vehicle has the luxury model: true")
-        expect(page).to have_content("Vehicle horsepower: #{vehicle_hp}")
-        expect(page).to have_content("Vehicle torque: #{vehicle_tq}")
-      end
-    end
-
     it "When I visit '/dealerships/:dealership_id/vehicles', I see the vehicles in alphabetical order by name when I click a button" do
       visit "/dealerships/#{@dealer_1.id}/vehicles"
 
@@ -81,7 +49,7 @@ RSpec.describe "Dealership_vehicles_index_page", type: :feature do
       vehicle_supra = find("#id_#{@vehicle_1.id}")
       vehicle_rav_4 = find("#id_#{@vehicle_2.id}")
 
-      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealer_1.id}/alphabetical/vehicles/")
+      expect(current_path).to eq("/dealerships/#{@dealer_1.id}/vehicles/")
 
       expect(vehicle_rav_4).to appear_before(vehicle_supra)
     end
@@ -95,7 +63,7 @@ RSpec.describe "Dealership_vehicles_index_page", type: :feature do
 
       click_on "Only return records with more than `number` of cylinders."
 
-      expect(current_url).to eq("http://www.example.com/dealerships/#{@dealer_1.id}/vehicles")
+      expect(current_path).to eq("/dealerships/#{@dealer_1.id}/vehicles/")
 
       expect(page).to_not have_content(@vehicle_2.name)
     end

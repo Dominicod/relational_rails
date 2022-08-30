@@ -5,12 +5,10 @@
   <p>Car-wash center: <%= @dealership.car_wash %></p>
   <p>Current vehicle count: <%= @dealership.vehicles_count %></p>
   <div class="btn-group" role="group">
-    <form action="/dealerships/<%= @dealership.id %>" method="POST">
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-      <input type="hidden" name="_method" value="DELETE">
-      <input type="submit" value="Delete Dealership" class="mx-1 btn btn-danger">
-    </form>
-    <%= link_to "Update Dealership", "/dealerships/#{@dealership.id}/edit", class: "mx-1 btn btn-warning"%>
+    <%= form_with url: "/dealerships/#{@dealership.id}", method: :delete, local: true, authenticity_token: form_authenticity_token do |form| %>
+      <%= form.submit "Delete Dealership", class: "mx-1 btn btn-danger" %>
+    <% end %>
+    <%= link_to "Update Dealership", "/dealerships/#{@dealership.id}/edit", class: "mx-1 btn btn-warning rounded"%>
   </div>
   <%= link_to "View dealership vehicles","/dealerships/#{@dealership.id}/vehicles", class: "btn btn-success mt-3" %>
 </div>

@@ -5,27 +5,19 @@ class DealershipVehiclesController < ApplicationController
 
   def index
     @dealer = Dealership.find(params[:id])
+    @vehicles = @dealer.vehicles
 
-    if params[:_method] == "PATCH"
-      @vehicles = @dealer.vehicles.where("cylinder_count > #{params[:threshold]}")
-    else
-      params[:alphabetical] == "alphabetical" ? @vehicles = @dealer.vehicles.order(:name) : @vehicles = @dealer.vehicles
+    if params[:sort] == "alphabetical"
+      @vehicles = @dealer.alphabetical_vehicles
+    elsif params[:sort] == "cylinder_threshold"
+      @vehicles = @dealer.cylinder_threshold(params[:threshold])
     end
   end
 
   def create
     dealer = Dealership.find(params[:id])
-    dealer.vehicles.create!(name: v_params[:name], cylinder_count: v_params[:cylinder_count],
-                       horsepower: v_params[:horsepower], torque: v_params[:torque],
-                       luxury_model: v_params[:luxury_model])
+    dealer.vehicles.create!(vehicle_params)
 
     redirect_to "/dealerships/#{dealer.id}/vehicles"
-  end
-
-  private
-  def v_params
-    {name: params[:vehicle][:name], cylinder_count: params[:vehicle][:cylinder_count],
-     horsepower: params[:vehicle][:horsepower], torque: params[:vehicle][:torque],
-     luxury_model: params[:vehicle][:luxury_model] ? true : false}
   end
 end

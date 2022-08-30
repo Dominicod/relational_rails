@@ -1,22 +1,35 @@
 <h1>New Dealership</h1>
 
-<form action="/dealerships" method="post">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+<%= form_with url: "/dealerships/", method: :post, local: true, authenticity_token: form_authenticity_token do |form| %>
   <div class="mb-3">
-    <label for="name" class="form-label">Dealer name:</label>
-    <input type="text" class="form-control" id="name" name='dealer[name]' required>
+    <%= form.label :name, "Dealer name:", class: "form-label" %>
+    <%= form.text_field :name, class: "form-control", required: true, placeholder: "Dealer name.." %>
   </div>
   <div class="mb-3">
-    <label for="lot_size" class="form-label">Dealer lot size:</label>
-    <input type="text" class="form-control" id="lot_size" name='dealer[lot_size]' required>
+    <%= form.label :vehicle_lot_size, "Dealer lot size:", class: "form-label" %>
+    <%= form.number_field :vehicle_lot_size, class: "form-control", required: true, placeholder: "Dealer lot size.." %>
   </div>
-  <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="service_center" name='dealer[service_center]'>
-    <label class="form-check-label" for="service_center">Dealer service center</label>
+  <div class="mb-3 p-3 rounded" style="background-color: #37393a">
+    <div class="form-check">
+      <%= form.radio_button :service_center, true, class: "form-check-input" %>
+      <%= form.label :service_center_true, "Has a service center", class: "form-check-label" %>
+    </div>
+    <div class="form-check">
+      <%= form.radio_button :service_center, false, class: "form-check-input", checked: true %>
+      <%= form.label :service_center_false, "Does not have a service center", class: "form-check-label" %>
+    </div>
   </div>
-  <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="car_wash" name='dealer[car_wash]'>
-    <label class="form-check-label" for="car_wash">Dealer car wash</label>
+  <div class="mb-3 p-3 rounded" style="background-color: #37393a">
+    <div class="form-check">
+      <%= form.radio_button :car_wash, true, class: "form-check-input" %>
+      <%= form.label :car_wash_true, "Has a car wash center", class: "form-check-label" %>
+    </div>
+    <div class="form-check">
+      <%= form.radio_button :car_wash, false, class: "form-check-input", checked: true %>
+      <%= form.label :car_wash_center, "Does not have a car wash center", class: "form-check-label" %>
+    </div>
   </div>
-  <input type='submit' value="Create Dealership" class="btn btn-success"/>
-</form>
+  <div class="d-flex align-items-center justify-content-center">
+    <%= form.submit "Create Dealership", class: "btn btn-success" %>
+  </div>
+<% end %>

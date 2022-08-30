@@ -1,5 +1,5 @@
 <h1>All Vehicles</h1>
-
+<p class="text-muted">Showing only luxury model vehicles</p>
 <% @vehicles.each do |vehicle| %>
   <div id="id_<%= vehicle.id %>" class="d-flex align-items-center justify-content-center flex-column mt-5">
     <h5>Vehicle name: <%= link_to vehicle.name, "/vehicles/#{vehicle.id}", class: "link-success"%></h5>
@@ -8,12 +8,10 @@
     <p>Vehicle horsepower: <%= vehicle.horsepower %></p>
     <p>Vehicle torque: <%= vehicle.torque %></p>
     <div class="btn-group" role="group">
-      <form action="/vehicles/<%= vehicle.id %>" method="POST">
-        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-        <input type="hidden" name="_method" value="DELETE">
-        <input type="submit" value="Delete vehicle" class="mx-1 btn btn-danger">
-      </form>
-      <%= link_to "Update Vehicle", "/vehicles/#{vehicle.id}/edit", class: "mx-1 btn btn-warning" %>
+      <%= form_with url: "/vehicles/#{vehicle.id}", method: :delete, local: true, authenticity_token: form_authenticity_token do |form| %>
+        <%= form.submit "Delete Vehicle", class: "mx-1 btn btn-danger" %>
+      <% end %>
+      <%= link_to "Update Vehicle", "/vehicles/#{vehicle.id}/edit", class: "mx-1 btn btn-warning rounded" %>
     </div>
   </div>
 <% end %>
