@@ -35,42 +35,10 @@ RSpec.describe "Vehicle show_page", type: :feature do
       expect(page).to_not have_content("Vehicle name: #{@vehicle_4.name}")
     end
 
-    it "When I visit '/vehicles/:id' I see a link to update that vehicle which takes me to '/vehicles/:id/edit' so I can update the vehicle" do
-      visit "/vehicles/#{@vehicle_1.id}"
-      vehicle_name = "GR86"
-      vehicle_cylinders = 4
-      vehicle_hp = 228
-      vehicle_tq = 200
-
-      click_link "Update Vehicle"
-
-      expect(current_url).to eq("http://www.example.com/vehicles/#{@vehicle_1.id}/edit")
-
-      expect(page.has_field?).to eq true
-
-      fill_in "vehicle[name]", with: vehicle_name
-      fill_in "vehicle[cylinder_count]", with: vehicle_cylinders
-      fill_in "vehicle[horsepower]", with: vehicle_hp
-      fill_in "vehicle[torque]", with: vehicle_tq
-      check "vehicle[luxury_model]"
-
-      click_on "Update Vehicle"
-
-      expect(current_url).to eq("http://www.example.com/vehicles/#{@vehicle_1.id}")
-
-      within "#id_#{@vehicle_1.id}" do
-        expect(page).to have_content("Vehicle name: #{vehicle_name}")
-        expect(page).to have_content("Vehicle cylinder count: #{vehicle_cylinders}")
-        expect(page).to have_content("This vehicle has the luxury model: #{true}")
-        expect(page).to have_content("Vehicle horsepower: #{vehicle_hp}")
-        expect(page).to have_content("Vehicle torque: #{vehicle_tq}")
-      end
-    end
-
     it 'I can delete vehicles from the vehicle show page' do
       visit "/vehicles/#{@vehicle_2.id}"
 
-      click_button "Delete vehicle"
+      click_button "Delete Vehicle"
 
       expect(current_url).to eq("http://www.example.com/vehicles")
 

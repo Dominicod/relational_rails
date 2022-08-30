@@ -25,9 +25,4 @@ class VehiclesController < ApplicationController
 
     redirect_to "/vehicles/#{vehicle.id}"
   end
-
-  private # fix boolean
-  def vehicle_params # convert boolean to a radio
-    params.permit(:name, :cylinder_count, :horsepower, :torque, :luxury_model)
-  end
 end

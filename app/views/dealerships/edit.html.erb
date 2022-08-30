@@ -1,13 +1,13 @@
 <h1>Update Dealership</h1>
 
-<%= form_with url: "/dealerships/", method: :patch, local: true, authenticity_token: form_authenticity_token do |form| %>
+<%= form_with url: "/dealerships/#{@dealer.id}", method: :patch, local: true, authenticity_token: form_authenticity_token do |form| %>
   <div class="mb-3">
     <%= form.label :name, "Dealer name:", class: "form-label" %>
     <%= form.text_field :name, class: "form-control", required: true, placeholder: "Dealer name.." %>
   </div>
   <div class="mb-3">
-    <%= form.label :lot_size, "Dealer lot size:", class: "form-label" %>
-    <%= form.number_field :lot_size, class: "form-control", required: true, placeholder: "Dealer lot size.." %>
+    <%= form.label :vehicle_lot_size, "Dealer lot size:", class: "form-label" %>
+    <%= form.number_field :vehicle_lot_size, class: "form-control", required: true, placeholder: "Dealer lot size.." %>
   </div>
   <div class="mb-3 p-3 rounded" style="background-color: #37393a">
     <div class="form-check">

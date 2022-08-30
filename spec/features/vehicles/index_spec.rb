@@ -75,7 +75,7 @@ RSpec.describe "Vehicles index_page", type: :feature do
     vehicles.each do |vehicle|
       within "#id_#{vehicle.id}" do
         expect(page.has_link?).to eq true
-        click_button "Delete vehicle"
+        click_button "Delete Vehicle"
 
         expect(current_path).to eq("/vehicles")
       end

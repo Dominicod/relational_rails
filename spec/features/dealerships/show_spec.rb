@@ -40,34 +40,6 @@ RSpec.describe "Dealership show_page", type: :feature do
       expect(page).to have_content("Current vehicle count: #{@dealer_2.vehicles.count}")
     end
 
-    it 'Update Dealership link in show page is present, takes user to "/parents/:id/edit" to where they can submit a form that edits the DB' do
-      visit "/dealerships/#{@dealer_1.id}"
-      dealer_name = "Suzuki"
-      dealer_lot_size = 50
-
-      click_link "Update Dealership"
-
-      expect(current_path).to eq("/dealerships/#{@dealer_1.id}/edit")
-
-      expect(page.has_field?).to eq true
-
-      fill_in "dealer[name]", with: dealer_name
-      fill_in "dealer[lot_size]", with: dealer_lot_size
-      uncheck "dealer[service_center]"
-      check "dealer[car_wash]"
-
-      click_on "Update Dealership"
-
-      expect(current_path).to eq("/dealerships/#{@dealer_1.id}")
-
-      within "#id_#{@dealer_1.id}" do
-        expect(page).to have_content("Dealership name: #{dealer_name}")
-        expect(page).to have_content("Dealership lot size: #{dealer_lot_size}")
-        expect(page).to have_content("Service center: #{false}")
-        expect(page).to have_content("Car-wash center: #{true}")
-      end
-    end
-
     it 'I can delete dealerships from the dealership show page' do
       visit "/dealerships/#{@dealer_2.id}"
 
