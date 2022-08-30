@@ -49,7 +49,7 @@ RSpec.describe "Dealership_vehicles_index_page", type: :feature do
       vehicle_supra = find("#id_#{@vehicle_1.id}")
       vehicle_rav_4 = find("#id_#{@vehicle_2.id}")
 
-      expect(current_path).to eq("/dealerships/#{@dealer_1.id}/alphabetical/vehicles/")
+      expect(current_path).to eq("/dealerships/#{@dealer_1.id}/vehicles/")
 
       expect(vehicle_rav_4).to appear_before(vehicle_supra)
     end
@@ -63,7 +63,7 @@ RSpec.describe "Dealership_vehicles_index_page", type: :feature do
 
       click_on "Only return records with more than `number` of cylinders."
 
-      expect(current_path).to eq("/dealerships/#{@dealer_1.id}/vehicles")
+      expect(current_path).to eq("/dealerships/#{@dealer_1.id}/vehicles/")
 
       expect(page).to_not have_content(@vehicle_2.name)
     end
