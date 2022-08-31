@@ -6,6 +6,10 @@ RSpec.describe Dealership, type: :model do
     it {should validate_presence_of :vehicle_lot_size}
   end
 
+  describe 'Relationships' do
+    it {should have_many :vehicles}
+  end
+
   describe 'instance methods' do
     before(:each) do
       @dealer_1 = Dealership.create!(name: "Toyota", vehicle_lot_size: 10, service_center: true, car_wash: false)
@@ -17,10 +21,6 @@ RSpec.describe Dealership, type: :model do
       @vehicle_3 = @dealer_2.vehicles.create!(name: "Mustang GT Fastback", cylinder_count: 8, luxury_model: true, horsepower: 450, torque: 410)
       @vehicle_4 = @dealer_2.vehicles.create!(name: "Ford GT", cylinder_count: 6, luxury_model: true, horsepower: 660, torque: 634)
       @vehicle_5 = @dealer_3.vehicles.create!(name: "GTR", cylinder_count: 6, luxury_model: true, horsepower: 600, torque: 481)
-    end
-
-    describe 'Relationships' do
-      it {should have_many :vehicles}
     end
 
     describe 'vehicles_count' do

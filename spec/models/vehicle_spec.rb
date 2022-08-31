@@ -8,9 +8,7 @@ RSpec.describe Vehicle, type: :model do
     it {should validate_presence_of :horsepower}
     it {should validate_presence_of :dealership_id}
   end
-  describe 'instance methods' do
-    describe 'Relationships' do
-      it {should belong_to :dealership}
-    end
+  describe 'Relationships' do
+    it {should have_many :vehicles}
   end
 end
