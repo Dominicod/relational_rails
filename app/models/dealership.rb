@@ -12,6 +12,6 @@ class Dealership < ApplicationRecord
   end
 
   def cylinder_threshold(threshold)
-    vehicles.where("cylinder_count > #{threshold}")
+    vehicles.where("cylinder_count > ?", threshold)
   end
 end
